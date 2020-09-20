@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; }
 
 :root {
-    font-size: clamp(14px, 3vw, 20px);
+    font-size: clamp(14px, 1vw, 24px);
 }
 
 html {
@@ -9,7 +9,7 @@ html {
 }
 
 p {
-    margin-bottom: 1vw;
+    margin: 1.75vw 0;
 }
 
 #content-container {
@@ -31,11 +31,19 @@ header > * {
     font-weight: 400;
 }
 
-#preface h3 {
-    font-style: oblique;
-    margin-bottom: 1vw;
+section {
+    margin: 4vw 0;
 }
 
-#preface h6 {
+section h3 {
+    font-style: oblique;
+    margin-bottom: 1vw;
+    position: sticky;
+    top: 0px;
+    background: #ffffffaa;
+    padding: 10px 0;
+}
+
+section h6 {
     margin-bottom: 1vw;
 }
