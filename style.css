@@ -1,0 +1,41 @@
+* { margin: 0; padding: 0; }
+
+:root {
+    font-size: clamp(14px, 3vw, 20px);
+}
+
+html {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+p {
+    margin-bottom: 1vw;
+}
+
+#content-container {
+    max-width: 80ch;
+    margin: 0 auto;
+    padding: 2vw;
+}
+
+header {
+    text-align: center;
+    padding: 2vw;
+}
+
+header > * {
+    margin: 1vw;
+}
+
+#page-subtitle {
+    font-weight: 400;
+}
+
+#preface h3 {
+    font-style: oblique;
+    margin-bottom: 1vw;
+}
+
+#preface h6 {
+    margin-bottom: 1vw;
+}
