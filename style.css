@@ -9,7 +9,8 @@ html {
 }
 
 p {
-    margin: 1.75vw 0;
+    margin: clamp(12px, 1vw, 24px) 0;
+    line-height: 1.3rem;
 }
 
 #content-container {
