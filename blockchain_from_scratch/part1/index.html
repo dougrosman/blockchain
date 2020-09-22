@@ -7,66 +7,136 @@
     <title>BFS: Part 1</title>
     <style>
         html {font-family: sans-serif;}
+        body {counter-reset: section;}
+
+        h2 {
+            margin-top: clamp(20px, 6vw, 60px);
+        }
+
         pre {
             background: #111111;
             border-radius: 5px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             width: max-content;
         }
         code {
             color: white;
             font-family: 'Courier New', Courier, monospace;
         }
+        a {
+            color: #dd6600;
+        }
+        a:hover {
+            color: darkmagenta;
+        }
+
+        p {
+            line-height: 1.3em;
+        }
+
         li {
             margin: 6px 0;
+            line-height: 1.2em;
         }
 
         section {
-            background: #eeeeee;
+            background: #f5f5f5;
             border-radius: 20px;
             padding: 15px;
             margin: 30px 0;
-            box-shadow: 0px 3px 20px -10px black;
+            box-shadow: 0px 3px 10px -6px black;
             max-width: 80ch;
+        }
+
+        section > * {
+            padding-left: 1em;
+        }
+
+        section h4 {
+            color: teal;
+        }
+
+        section h4::before {
+            counter-increment: section;
+            content: counter(section)". ";
+        }
+
+        .notes h4::before {
+            content: "";
         }
     </style>
 </head>
 <body>
     <h1>Blockchain from scratch part 1</h1>
-    <p>Open the Developer Console to view page content</p>
-    <h3>Supplementary instructions:</h3>
+    <h2>Setup instructions:</h2>
+    <section>
+        <h4>Downloading and installing VS Code</h4>
+        <ol>
+            <li>Download and install a text editor called <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>. We'll use this to write our code</li>
+            <li>Open VS Code. And open the Settings tab by going to the Gear Icon in the bottom left corner of the window, and clicking on 'Settings.'</li>
+            <li>Change the following settings:
+                <ol>
+                    <li>Change <strong>Autosave</strong> from 'off' to 'afterDelay'</li>
+                    <li>In the search bar, search for '<strong>Word Wrap</strong>' and turn that to 'on'</li>
+                    <li>Search for '<strong>Compact Folders</strong>' and uncheck that box</li>
+                </ol>
+            </li>
+            <li>Go to the '<strong>Extensions</strong>' tab on the left panel: <img src="../images/extensions.png" alt="extensions tab" width="40"> and search for '<strong>Live Server</strong>.' Click the green install button to install the extension.</li>
+            <li>I strongly recommend using Firefox as your main browser for this class. Chrome is acceptable as well. Do not use Safari or Edge.</li>
+        </ol>
+    </section>
+    <section>
+        <h4>Setting up a folder for this workshop</h4>
+        <ol>
+            <li>In your Mac Finder or Windows Explorer, create a folder called <strong>blockchain_from_scratch</strong>. For the sake of this demo, I recommend putting that on your Desktop or in your Documents folder. You can move it to your classwork folder later (if you have one).</li>
+            <li>In VS Code, go to File --> Open (on a Mac) or File --> Open Folder (on Windows), and open the blockchain_from_scratch folder.</li>
+        </ol>
+    </section>
+    <section>
+        <h4>Downloading Doug's code from GitHub</h4>
+        <ol>
+            <li>Open a Terminal Window inside VS Code (ctrl + ~)</li>
+            <li>'cd' into the directory where you keep your work for this class: <pre><code>cd path/to/folder</code></pre></li>
+            <li>Make a folder to store my code: <pre><code>mkdir doug-code</code></pre></li>
+            <li>'cd' into the doug-code folder: <pre><code>cd doug-code</code></pre></li>
+            <li>clone my github repository<pre><code>git clone https://github.com/dougrosman/blockchain.git</code></pre> The completed code for this workshop is inside the "blockchain_from_scratch" folder, in the "main.js" files</li>
+        </ol>
+    </section>
     <section>
         <h4>Installing crypto.js using npm</h4>
         <ol>
-            <li>Open a Terminal inside VS Code (ctrl + ~)</li>
+            <li>Open a Terminal Window inside VS Code (ctrl + ~)</li>
             <li>'cd' into the directory with your index.html and main.js (you might already be in there): <pre><code>cd /path/to/folder</code></pre></li>
             <li>type (press 'Return' after entering each Terminal command): <pre><code>sudo npm install --save crypto-js</code></pre> and enter your password</li>
         </ol>
     </section>
     
     <section>
-        <h4>Running this code in the VS Code Terminal</h4>
-        <p>Once you've written your main.js to do something, type this command each time you want to run your code:</p>
-            <pre><code>node main.js</code></pre>
-        <p>You made need to install npm and node to do this. Visit <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">docs.npmjs.com</a>to find the installation instructions for your operating system. You can do the Terminal commands inside of the Terminal Window in VS Code.</p>
+        <h4>Running your code in the VS Code Terminal</h4>
+        <p>Once you've written your main.js to do something (like print out your blockchain to the console), type this command each time you want to run your code:</p>
+         <div><pre><code>node main.js</code></pre></p>
+        <p>You may need to install npm and node to do this. Visit <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">docs.npmjs.com</a> to find the installation instructions for your operating system. You can do the Terminal commands inside of the Terminal Window in VS Code.</p>
     </section>
 
     <section>
         <h4>Running this code in the browser using browserify.js</h4>
+        <h5>Note: The "require" statement at the top of our main.js file requires a server environment (like <em>node.js</em>) to work.</h5>
         <ol>
             <li>Visit <a href="http://browserify.org/#install">browserify.org</a></li>
             <li>In the VS Code Terminal, type: <pre><code>npm install -g browserify</code></pre></li>
             <li>Then: <pre><code>sudo npm install uniq</code></pre> and enter your password.</li>
-            <li>add this to the &lt;body&gt; section in your index.html file (at the very bottom of the &lt;body&gt;, just before the closing tag): <pre><code> &lt;script src="bundle.js"&gt;&lt;script&gt; </code></pre></li>
+            <li>add this to the &lt;body&gt; section in your index.html file (at the very bottom of the &lt;body&gt;, just before the closing tag):
+                <pre><code>&lt;script src="bundle.js"&gt;&lt;script&gt; </code></pre></li>
             <li>Then type this into the VS Code Terminal each time you edit your main.js file: <pre><code>browserify main.js -o bundle.js</code></pre></li>
         </ol>
     </section>
 
-    <h3>Notes:</h3>
+    <h2>Notes:</h2>
 
-    <section>
+    <section class="notes">
         <h4>What goes in a block?</h4>
-        <pre><code>
+        <div>
+            <pre><code>
 class Block {
     constructor(index, timestamp, data, previousHash = ''){
         this.index = index;
@@ -76,7 +146,8 @@ class Block {
         this.hash = this.calculateHash();
     }
 }
-        </code></pre>
+            </code></pre>
+        </div>
 
         <ul>
             <li>Index: The location of the Block on the Blockchain (The block height)</li>
