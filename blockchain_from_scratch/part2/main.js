@@ -6,6 +6,7 @@ class Block {
         this.timestamp = timestamp;
         this.data = data;
         this.previousHash = previousHash;
+        this.nonce = 0;
         //this.hash = '';
 
         // implement after creating calculateHash()
@@ -14,13 +15,26 @@ class Block {
 
     calculateHash() {
         // calculate and store the hash
-        let hash = SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash);
+        let hash = SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash + this.nonce);
 
         // convert the hash to a string
         let hashString = hash.toString();
 
         // return the string
         return hashString;
+
+    }
+
+    // we want the hash of our block to begin with a certain amount of zeros
+    mineBlock(difficulty) {
+
+        while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
+            this.nonce++;
+            //console.log(this.hash);
+            this.hash = this.calculateHash();
+        }
+
+        console.log("Block mined: " + this.hash + "\nNonce: " + this.nonce + "\n");
 
     }
 }
@@ -31,6 +45,7 @@ class Blockchain {
 
         // implement after creating createGenesisBlock
         this.chain = [this.createGenesisBlock()];
+        this.difficulty = 5;
         
     }
 
@@ -48,8 +63,7 @@ class Blockchain {
         // get the hash of the latest block
         newBlock.previousHash = this.getLatestBlock().hash;
 
-        // calculate the hash of the new block
-        newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
 
         // add the new block to the chain
         this.chain.push(newBlock);
@@ -75,16 +89,17 @@ class Blockchain {
 
 let demoCoin = new Blockchain();
 
+console.log("\n$$$$$$$$$$$$$$$$$$$$$ MINING TIME $$$$$$$$$$$$$$$$$$$$$\n")
+
+console.log("Mining block 1...");
 demoCoin.addBlock(new Block(1, "09/22/2020", {amount: 4}));
+
+console.log("Mining block 2...");
 demoCoin.addBlock(new Block(2, "09/22/2020", {amount: 494}));
+
+console.log("Mining block 3...");
 demoCoin.addBlock(new Block(3, "09/22/2020", {amount: 800}));
 
 console.log("is blockchain valid? " + demoCoin.isChainValid());
 
-// tamper with the coin
-demoCoin.chain[1].data = {amount: "fish"};
-demoCoin.chain[1].hash = demoCoin.chain[1].calculateHash();
-
-console.log("is blockchain valid? " + demoCoin.isChainValid());
-// console.log(JSON.stringify(demoCoin, null, 4));
 

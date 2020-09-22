@@ -81,7 +81,7 @@ demoCoin.addBlock(new Block(3, "09/22/2020", {amount: 800}));
 
 console.log("is blockchain valid? " + demoCoin.isChainValid());
 
-// tamper with the coin
+// tamper with the chain
 demoCoin.chain[1].data = {amount: "fish"};
 demoCoin.chain[1].hash = demoCoin.chain[1].calculateHash();
 
