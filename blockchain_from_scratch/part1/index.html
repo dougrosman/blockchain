@@ -10,12 +10,24 @@
         pre {
             background: #111111;
             border-radius: 5px;
-            padding: 10px;
+            padding: 10px 20px;
             width: max-content;
         }
         code {
             color: white;
             font-family: 'Courier New', Courier, monospace;
+        }
+        li {
+            margin: 6px 0;
+        }
+
+        section {
+            background: #eeeeee;
+            border-radius: 20px;
+            padding: 15px;
+            margin: 30px 0;
+            box-shadow: 0px 3px 20px -10px black;
+            max-width: 80ch;
         }
     </style>
 </head>
@@ -23,30 +35,57 @@
     <h1>Blockchain from scratch part 1</h1>
     <p>Open the Developer Console to view page content</p>
     <h3>Supplementary instructions:</h3>
-    <h5>Installing crypto.js using npm</h5>
-    <ol>
-        <li>Open a Terminal inside VS Code (ctrl + ~)</li>
-        <li>cd into the directory with your index.html and main.js</li>
-        <li>type: <pre><code>npm install --save crypto-js</code></pre></li>
-    </ol>
+    <section>
+        <h4>Installing crypto.js using npm</h4>
+        <ol>
+            <li>Open a Terminal inside VS Code (ctrl + ~)</li>
+            <li>'cd' into the directory with your index.html and main.js (you might already be in there): <pre><code>cd /path/to/folder</code></pre></li>
+            <li>type (press 'Return' after entering each Terminal command): <pre><code>sudo npm install --save crypto-js</code></pre> and enter your password</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h4>Running this code in the VS Code Terminal</h4>
+        <p>Once you've written your main.js to do something, type this command each time you want to run your code:</p>
+            <pre><code>node main.js</code></pre>
+        <p>You made need to install npm and node to do this. Visit <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">docs.npmjs.com</a>to find the installation instructions for your operating system. You can do the Terminal commands inside of the Terminal Window in VS Code.</p>
+    </section>
+
+    <section>
+        <h4>Running this code in the browser using browserify.js</h4>
+        <ol>
+            <li>Visit <a href="http://browserify.org/#install">browserify.org</a></li>
+            <li>In the VS Code Terminal, type: <pre><code>npm install -g browserify</code></pre></li>
+            <li>Then: <pre><code>sudo npm install uniq</code></pre> and enter your password.</li>
+            <li>add this to the &lt;body&gt; section in your index.html file (at the very bottom of the &lt;body&gt;, just before the closing tag): <pre><code> &lt;script src="bundle.js"&gt;&lt;script&gt; </code></pre></li>
+            <li>Then type this into the VS Code Terminal each time you edit your main.js file: <pre><code>browserify main.js -o bundle.js</code></pre></li>
+        </ol>
+    </section>
 
     <h3>Notes:</h3>
 
-    <pre><code>
-    class Block {
-        constructor(index, timestamp, data, previousHash = ''){ 
-
-        }
+    <section>
+        <h4>What goes in a block?</h4>
+        <pre><code>
+class Block {
+    constructor(index, timestamp, data, previousHash = ''){
+        this.index = index;
+        this.timestamp = timestamp;
+        this.data = data;
+        this.previousHash = previousHash;
+        this.hash = this.calculateHash();
     }
-    </code></pre>
+}
+        </code></pre>
 
-    <ul>
-        <li>Index: The location of the Block on the Blockchain (The block height)</li>
-        <li>Timestamp: When the block was created</li>
-        <li>Data: any type of data you want to associate with the block (e.g., transaction information, how much sent, who was the sender or receiver, etc.)</li>
-        <li>previousHash: the hash of the previous block</li>
-    </ul>
-
-    <script type="text/javascript" src="main.js"></script>
+        <ul>
+            <li>Index: The location of the Block on the Blockchain (The block height)</li>
+            <li>Timestamp: When the block was created</li>
+            <li>Data: any type of data you want to associate with the block (e.g., transaction information, how much sent, who was the sender or receiver, etc.)</li>
+            <li>previousHash: the hash of the previous block</li>
+            <li>hash: the hash of the current block</li>
+        </ul>
+    </section>
+    <script src="main.js"></script>
 </body>
 </html>
