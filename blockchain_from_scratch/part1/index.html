@@ -5,9 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BFS: Part 1</title>
+    <style>
+        html {font-family: sans-serif;}
+        pre {
+            background: #111111;
+            border-radius: 5px;
+            padding: 10px;
+            width: max-content;
+        }
+        code {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
 </head>
 <body>
-    
-    
+    <h1>Blockchain from scratch part 1</h1>
+    <p>Open the Developer Console to view page content</p>
+    <h3>Supplementary instructions:</h3>
+    <h5>Installing crypto.js using npm</h5>
+    <ol>
+        <li>Open a Terminal inside VS Code (ctrl + ~)</li>
+        <li>cd into the directory with your index.html and main.js</li>
+        <li>type: <pre><code>npm install --save crypto-js</code></pre></li>
+    </ol>
+
+    <h3>Notes:</h3>
+
+    <pre><code>
+    class Block {
+        constructor(index, timestamp, data, previousHash = ''){ 
+
+        }
+    }
+    </code></pre>
+
+    <ul>
+        <li>Index: The location of the Block on the Blockchain (The block height)</li>
+        <li>Timestamp: When the block was created</li>
+        <li>Data: any type of data you want to associate with the block (e.g., transaction information, how much sent, who was the sender or receiver, etc.)</li>
+        <li>previousHash: the hash of the previous block</li>
+    </ul>
+
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
