@@ -4,10 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BFS – Part 3</title>
+    <title>Part 3: Mining</title>
+    <style>
+        html {font-family: sans-serif;}
+        body {counter-reset: section;}
+
+        h2 {
+            margin-top: clamp(20px, 6vw, 60px);
+        }
+
+        pre {
+            background: #111111;
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: max-content;
+        }
+        code {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        a {
+            color: #dd6600;
+        }
+        a:hover {
+            color: darkmagenta;
+        }
+
+        p {
+            line-height: 1.3em;
+        }
+
+        li {
+            margin: 6px 0;
+            line-height: 1.2em;
+        }
+
+        section {
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 15px;
+            margin: 30px 0;
+            box-shadow: 0px 3px 10px -6px black;
+            max-width: 80ch;
+        }
+
+        section > * {
+            padding-left: 1em;
+        }
+
+        section h4 {
+            color: teal;
+        }
+
+        section h4::before {
+            counter-increment: section;
+            content: counter(section)". ";
+        }
+
+        .notes h4::before {
+            content: "";
+        }
+    </style>
 </head>
 <body>
-    <h1>Blockchain from Scratch: Part 3</h1>
+    <h1>Blockchain from Scratch with JavaScript</h1>
+    <h2>Part 2: Add Proof of Work</h2>
+    <h3><a href="../part0">Part 0: Hashing Review</a></h3>
+    <h3><a href="../part1">Part 1: Create the Blockchain</a></h3>
+    <h3><a href="../part2">Part 2: Add Proof of Work</a></h3>
+    <h3><a href=".">Part 3: Add Proof of Work</a></h3>
+    <br>
+    <h3>Code:</h3>
+    <p>Copy and paste this into your main.js file.</p>
+    <pre><code>
+        const SHA256 = require('crypto-js/sha256');
+
+        class Transaction {
+            constructor(fromAddress, toAddress, amount) {
+                this.fromAddress = fromAddress;
+                this.toAddress = toAddress;
+                this.amount = amount;
+            }
+        }
+        // add new functionality:
+        // transactions replaces data
+        // remove index
+        class Block {
+            constructor(timestamp, transactions, previousHash = ''){
+                this.timestamp = timestamp;
+                this.transactions = transactions;
+                this.previousHash = previousHash;
+                this.nonce = 0;
+                this.hash = this.calculateHash();
+            }
+        
+            calculateHash() {
+                // calculate and store the hash
+                let hash = SHA256(this.timestamp + this.transactions + this.previousHash + this.nonce);
+        
+                // convert the hash to a string
+                let hashString = hash.toString();
+        
+                // return the string
+                return hashString;
+        
+            }
+        
+            // we want the hash of our block to begin with a certain amount of zeros
+            mineBlock(difficulty) {
+        
+                while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
+                    this.nonce++;
+                    //console.log(this.hash);
+                    this.hash = this.calculateHash();
+                }
+        
+                console.log("BLOCK MINED: " + this.hash + "\nNonce: " + this.nonce);
+        
+            }
+        }
+        
+        // new functionality:
+        // add a mining reward
+        // place to store pending transactions
+        // need to mine block for pending transactions
+        // replace addBlock() method with minePendingTransactions
+        
+        
+        class Blockchain {
+            constructor() {
+                // this.chain = [];
+        
+                // implement after creating createGenesisBlock
+                this.chain = [this.createGenesisBlock()];
+                this.difficulty = 2;
+                this.pendingTransactions = [];
+                this.miningReward = 100;
+            }
+        
+            createGenesisBlock() {
+                return new Block("09/22/2020", "Genesis Block", "0");
+            }
+        
+            // returns latest block in the chain
+            getLatestBlock() {
+                return this.chain[this.chain.length - 1];
+            }
+        
+            minePendingTransactions(miningRewardAddress){
+                let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+                block.mineBlock(this.difficulty);
+        
+                console.log('Block successfully mined!');
+                this.chain.push(block);
+        
+                // the "coinbase" transaction
+                this.pendingTransactions = [
+                    new Transaction(null, miningRewardAddress, this.miningReward)
+                ];
+            }
+        
+            // adds a transaction to the transactions array
+            createTransaction(transaction) {
+                this.pendingTransactions.push(transaction);
+            }
+        
+            getBalanceOfAddress(address){
+                let balance = 0;
+        
+                for(const block of this.chain){
+                    for(const tx of block.transactions) {
+                        if(tx.fromAddress === address) {
+                            balance -= tx.amount;
+                        }
+        
+                        if(tx.toAddress === address) {
+                            balance += tx.amount;
+                        }
+                    }
+                }
+                return balance;
+            }
+        
+            isChainValid() {
+                for(let i = 1; i < this.chain.length; i++) {
+                    const currentBlock = this.chain[i];
+                    const previousBlock = this.chain[i-1];
+        
+                    if(currentBlock.hash !== currentBlock.calculateHash()) {
+                        return false;
+                    }
+                    if (currentBlock.previousHash !== previousBlock.hash){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        
+        // create an instance of the coin
+        
+        let demoCoin = new Blockchain();
+        
+        console.log("\n$$$$$$$$$$$$$$$$$$$$$ MINING TIME $$$$$$$$$$$$$$$$$$$$$\n")
+        
+        
+        console.log(demoCoin.pendingTransactions);
+        console.log(`\nStarting the miner...`);
+        demoCoin.minePendingTransactions('doog');
+        console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
+        console.log('\nBalance of dog is: ', demoCoin.getBalanceOfAddress('dog'));
+        console.log('\nBalance of cat is: ', demoCoin.getBalanceOfAddress('cat'));
+        
+        console.log(`\nStarting the miner...`);
+        demoCoin.minePendingTransactions('doog');
+        console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
+        
+        console.log(`\nStarting the miner...`);
+        demoCoin.minePendingTransactions('doog');
+        console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
+    </code></pre>
     
     
 </body>

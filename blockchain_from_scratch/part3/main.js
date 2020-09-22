@@ -1,10 +1,19 @@
 const SHA256 = require('crypto-js/sha256');
 
+class Transaction {
+    constructor(fromAddress, toAddress, amount) {
+        this.fromAddress = fromAddress;
+        this.toAddress = toAddress;
+        this.amount = amount;
+    }
+}
+// add new functionality:
+// transactions replaces data
+// remove index
 class Block {
-    constructor(index, timestamp, data, previousHash = ''){
-        this.index = index;
+    constructor(timestamp, transactions, previousHash = ''){
         this.timestamp = timestamp;
-        this.data = data;
+        this.transactions = transactions;
         this.previousHash = previousHash;
         this.nonce = 0;
         this.hash = this.calculateHash();
@@ -12,7 +21,7 @@ class Block {
 
     calculateHash() {
         // calculate and store the hash
-        let hash = SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash + this.nonce);
+        let hash = SHA256(this.timestamp + this.transactions + this.previousHash + this.nonce);
 
         // convert the hash to a string
         let hashString = hash.toString();
@@ -31,10 +40,17 @@ class Block {
             this.hash = this.calculateHash();
         }
 
-        console.log("Block mined: " + this.hash + "\nNonce: " + this.nonce + "\n");
+        console.log("BLOCK MINED: " + this.hash + "\nNonce: " + this.nonce);
 
     }
 }
+
+// new functionality:
+// add a mining reward
+// place to store pending transactions
+// need to mine block for pending transactions
+// replace addBlock() method with minePendingTransactions
+
 
 class Blockchain {
     constructor() {
@@ -42,12 +58,13 @@ class Blockchain {
 
         // implement after creating createGenesisBlock
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 5;
-        
+        this.difficulty = 2;
+        this.pendingTransactions = [];
+        this.miningReward = 100;
     }
 
     createGenesisBlock() {
-        return new Block(0, "09/22/2020", "Genesis Block", "0");
+        return new Block("09/22/2020", "Genesis Block", "0");
     }
 
     // returns latest block in the chain
@@ -55,15 +72,39 @@ class Blockchain {
         return this.chain[this.chain.length - 1];
     }
 
-    // adds a block to the chain, accepts a Block object
-    addBlock(newBlock) {
-        // get the hash of the latest block
-        newBlock.previousHash = this.getLatestBlock().hash;
+    minePendingTransactions(miningRewardAddress){
+        let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+        block.mineBlock(this.difficulty);
 
-        newBlock.mineBlock(this.difficulty);
+        console.log('Block successfully mined!');
+        this.chain.push(block);
 
-        // add the new block to the chain
-        this.chain.push(newBlock);
+        // the "coinbase" transaction
+        this.pendingTransactions = [
+            new Transaction(null, miningRewardAddress, this.miningReward)
+        ];
+    }
+
+    // adds a transaction to the transactions array
+    createTransaction(transaction) {
+        this.pendingTransactions.push(transaction);
+    }
+
+    getBalanceOfAddress(address){
+        let balance = 0;
+
+        for(const block of this.chain){
+            for(const tx of block.transactions) {
+                if(tx.fromAddress === address) {
+                    balance -= tx.amount;
+                }
+
+                if(tx.toAddress === address) {
+                    balance += tx.amount;
+                }
+            }
+        }
+        return balance;
     }
 
     isChainValid() {
@@ -88,15 +129,20 @@ let demoCoin = new Blockchain();
 
 console.log("\n$$$$$$$$$$$$$$$$$$$$$ MINING TIME $$$$$$$$$$$$$$$$$$$$$\n")
 
-console.log("Mining block 1...");
-demoCoin.addBlock(new Block(1, "09/22/2020", {amount: 4}));
 
-console.log("Mining block 2...");
-demoCoin.addBlock(new Block(2, "09/22/2020", {amount: 494}));
+console.log('\nBalance of Dog1 is: ', demoCoin.getBalanceOfAddress('dog'));
+console.log('\nBalance of Cat1 is: ', demoCoin.getBalanceOfAddress('cat'));
+console.log(demoCoin.pendingTransactions);
+console.log(`\nStarting the miner...`);
+demoCoin.minePendingTransactions('doog');
+console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
+console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('dog'));
+console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('cat'));
 
-console.log("Mining block 3...");
-demoCoin.addBlock(new Block(3, "09/22/2020", {amount: 800}));
+console.log(`\nStarting the miner...`);
+demoCoin.minePendingTransactions('doog');
+console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
 
-console.log("is blockchain valid? " + demoCoin.isChainValid());
-
-
+console.log(`\nStarting the miner...`);
+demoCoin.minePendingTransactions('doog');
+console.log('\nBalance of Doog is: ', demoCoin.getBalanceOfAddress('doog'));
