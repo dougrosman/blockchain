@@ -83,13 +83,14 @@
             </li>
             <li>Go to the '<strong>Extensions</strong>' tab on the left panel: <img src="../images/extensions.png" alt="extensions tab" width="40"> and search for '<strong>Live Server</strong>.' Click the green install button to install the extension.</li>
             <li>I strongly recommend using Firefox as your main browser for this class. Chrome is acceptable as well. Do not use Safari or Edge.</li>
+            <li></li>
         </ol>
     </section>
     <section>
         <h4>Setting up a folder for this workshop</h4>
         <ol>
             <li>In your Mac Finder or Windows Explorer, create a folder called <strong>blockchain_from_scratch</strong>. For the sake of this demo, I recommend putting that on your Desktop or in your Documents folder. You can move it to your classwork folder later (if you have one).</li>
-            <li>In VS Code, go to File --> Open (on a Mac) or File --> Open Folder (on Windows), and open the blockchain_from_scratch folder.</li>
+            <li>In VS Code, go to File –> Open (on a Mac) or File –> Open Folder (on Windows), and open the blockchain_from_scratch folder.</li>
         </ol>
     </section>
     <section>
@@ -104,10 +105,11 @@
     </section>
     <section>
         <h4>Installing crypto.js using npm</h4>
+        <p>You may need to install npm and node to do this. Visit <a href="https://nodejs.org/en/download/" target="_blank">nodejs.org/download</a> and download the installer for your operating system. Once it's downloaded, install the software. (During the installation, it will ask if you would like to download additional tools. You do <strong>not</strong> need to.)</p>
         <ol>
             <li>Open a Terminal Window inside VS Code (ctrl + ~)</li>
-            <li>'cd' into the directory with your index.html and main.js (you might already be in there): <pre><code>cd /path/to/folder</code></pre></li>
-            <li>type (press 'Return' after entering each Terminal command): <pre><code>sudo npm install --save crypto-js</code></pre> and enter your password</li>
+            <li>'cd' into the directory with your index.html and main.js (you might already be in there): <pre><code>cd /path/to/folder</code></pre> Then do the following command:</li>
+            <li>(Windows) <pre><code>npm install --save crypto-js</code></pre>(Mac) <pre><code>sudo npm install --save crypto-js</code></pre> You'll need to enter your computer password. It won't show anything while you're typing your password (but I promise it's being typed!). Press 'Return' after entering your password. (note: for Mac users, you may need to type <strong>sudo</strong> before any other time we use npm commands)</li>
         </ol>
     </section>
     
@@ -115,7 +117,6 @@
         <h4>Running your code in the VS Code Terminal</h4>
         <p>Once you've written your main.js to do something (like print out your blockchain to the console), type this command each time you want to run your code:</p>
          <div><pre><code>node main.js</code></pre></p>
-        <p>You may need to install npm and node to do this. Visit <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">docs.npmjs.com</a> to find the installation instructions for your operating system. You can do the Terminal commands inside of the Terminal Window in VS Code.</p>
     </section>
 
     <section>
@@ -124,7 +125,7 @@
         <ol>
             <li>Visit <a href="http://browserify.org/#install">browserify.org</a></li>
             <li>In the VS Code Terminal, type: <pre><code>npm install -g browserify</code></pre></li>
-            <li>Then: <pre><code>sudo npm install uniq</code></pre> and enter your password.</li>
+            <li>Then <pre><code>npm install uniq</code></pre></li>
             <li>add this to the &lt;body&gt; section in your index.html file (at the very bottom of the &lt;body&gt;, just before the closing tag):
                 <pre><code>&lt;script src="bundle.js"&gt;&lt;script&gt; </code></pre></li>
             <li>Then type this into the VS Code Terminal each time you edit your main.js file: <pre><code>browserify main.js -o bundle.js</code></pre></li>
