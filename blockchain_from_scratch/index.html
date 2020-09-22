@@ -130,11 +130,11 @@
         <h5>Note: The "require" statement at the top of our main.js file requires a server environment (like <em>node.js</em>) to work. So by default, this won't work in the browser, even if you're using the Live Server extension in VS Code.</h5>
         <ol>
             <li>Visit <a href="http://browserify.org/#install">browserify.org</a></li>
-            <li>In the VS Code Terminal, type: <pre><code>npm install -g browserify</code></pre></li>
+            <li>In the VS Code Terminal, type: <small>(Mac users, you may need to include <strong>sudo</strong> before npm in your commands)</small><pre><code>npm install -g browserify</code></pre></li>
             <li>Then <pre><code>npm install uniq</code></pre></li>
             <li>add this to the &lt;body&gt; section in your index.html file (at the very bottom of the &lt;body&gt;, just before the closing tag):
                 <pre><code>&lt;script src="bundle.js"&gt;&lt;script&gt; </code></pre></li>
-            <li>Then type this into the VS Code Terminal each time you edit your main.js file: <pre><code>browserify main.js -o bundle.js</code></pre></li>
+            <li>Then type this into the VS Code Terminal each time you edit your main.js file: <pre><code>browserify main.js -o bundle.js</code></pre></li> Then, you should see your changes in your browser JavaScript console, without having to run "node main.js" in your Terminal.
         </ol>
     </section>
 
