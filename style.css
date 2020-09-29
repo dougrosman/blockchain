@@ -17,6 +17,10 @@ a:hover {
     color: goldenrod;
 }
 
+p {
+    margin: 10px 0;
+}
+
 .wrapper {
     margin-top: 1vw;
     margin-left: 1vw;

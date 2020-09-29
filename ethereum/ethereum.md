@@ -3,19 +3,26 @@ img {
     width: 200px;
 }
 
+li {
+    margin: 6px 0;
+}
+
 </style>
 
 # Ethereum
 
 #### Table of contents
 
-1. [Introduction](#introduction)
-    - [What is Ethereum](#what-is-ethereum)
-2. [Smart Contracts](#smart-contracts)
-    - [The Oracle Problem](#the-oracle-problem)
-3. [DAOs - Decentralized Autonomous Organizations](#DAOs)
-    - [Subsection a](#subsection-a)
-    - [Subsection b](#subsection-b)
+- [Ethereum](#ethereum)
+      - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+    - [What is Ethereum?](#what-is-ethereum)
+    - [Smart Contracts](#smart-contracts)
+  - [Developing on Ethereum](#developing-on-ethereum)
+    - [Tools and Setup](#tools-and-setup)
+    - [Gas](#gas)
+    - [Solidity](#solidity)
+  - [Crytpo Art and "Rare Digitals"](#crytpo-art-and-rare-digitals)
 
 
 ## Introduction
@@ -56,13 +63,13 @@ An expanding list of topics we'll be covering over the next few weeks:
 
 1. __Smart Contracts:__ Autonomous, "unstoppable" code on the blockchain. "Code == Law"
 2. __Environmental Impact:__ Ethereum plans to cut 99% of its energy use at some point in the near future. Until then, your average ETH transaction uses [nearly as much electricity as a day's worth of electricity in an average USA home](https://digiconomist.net/ethereum-energy-consumption/).
-3. __The Oracle Problem:__ "Garbage in; garbage out." How do we verify the accuracy or truth of information so that it can satisfy a smart contract, and thus be added to the blockchain forever?
+3. __The Oracle Problem:__ "Garbage in; garbage out." How do we verify the accuracy or truth of information so that it can satisfy a smart contract, and thus be added to the blockchain forever? Blockchains are deterministic, and can only know what's going on inside of their own chain.
 4. __Decentralized Autonomous Organizations:__ What alternative governance models do smart contract and blockchain-based protocol provide? Can an organization govern itself non-hierarchically through blockchains and cryptocurrency? How do DAOs intersect with posthumanism in a way that allows non-human entities to govern themselves, and be part of governance systems with humans?
 5. __The Ethereum Virtual Machine and Planetary Scale Computation:__ What are the implications of a single global decentralized computer? Where does The EVM exist in Benjamin Bratton's hypothetical "Stack." What is IPFS and how do we store our files in a decentralized way?
 6. __Altcoins and Ethereum:__ It turns out many of the tokens out in the world use Ethereum's "featureless" infrastructure as a baseline to build upon. Most of the tokens we engage with in the class find their way back to Ethereum at some point.
 7. __Ethereum 1.0 --> 2.0:__ The jump from Proof-of-Work to Proof-of-stake, as well as sharding to address scaling. This seems like it will happen in the next 12-18 months.
 8. __Crytpo Art and "Rare Digitals":__ At the time of writing this (late September, 2020), the hype for Crypto Art is at an all-time high, with more established artists finally getting into the scene...and a lot of them feel weird about it. What does this do to Art?
-9. __State vs. non-State collaboration:__ Do protocols like Ethereum threaten state powers? Or do governments and their institutions adopt these technologies? We recently saw that the USPS filed a patent for a blockchain-facilitated mail-in voting system.
+9. __State vs. non-State collaboration:__ Do protocols like Ethereum threaten state powers? Or do governments and their institutions adopt these technologies? Recently, the United States Postal Service filed a patent for a blockchain-facilitated mail-in voting system.
 10. __Developing for Ethereum:__ Developing for Ethereum is challenging, but we can find ways to use it for our creative needs. Smart Contracts on Ethereum are primarily programmed with a language called Solidity. Companies such as OpenZeppelin have built fantastic open-source smart contract templates that help deal with the crucial, fundamental bits of code that are required for every smart contract to be secure. What are Token Standards (ERC-20, ERC 721), What are gas fees and why are they so high right now? How do we connect our smart contracts with a web page or web app?
 11. __History:__ How did the DAO hack shape Ethereum's trajectory?
 12. __Decentralized Finance (DeFi):__ ???
@@ -71,4 +78,24 @@ An expanding list of topics we'll be covering over the next few weeks:
 
 
 
+## Developing on Ethereum
+
+### Tools and Setup
+For now, you will need:
+1. The [Metamask](https://metamask.io/) browser extension. This doubles as an Ethereum wallet.
+2. Some testnet ETH (You can try to get some from here: There are many faucets out there, a lot are hit-or-miss
+- [faucet.dimensions.network](https://faucet.dimensions.network/) (Received 5 tETH Sept. 29 @ 6:55am)
+- [Ethereum Testnet Faucet](https://faucet.metamask.io/)(Tx hasn't gone through yet)
+
+### Gas
+Ethereum programs running on the Ethereum Virtual Machine (EVM) require gas to run.
+- Video: [Ethereum Q&A: Gas and Resource Allocation - Andreas Antonopolous](https://www.youtube.com/watch?v=HwUJIGlHFes)
+
+### Solidity
+
+
+
+## Crytpo Art and "Rare Digitals"
+
+[Autoglyphs - Larva Labs](https://larvalabs.com/autoglyphs)
 
