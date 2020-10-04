@@ -3,10 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="style.css">
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+
   <title>Basic Example</title>
 </head>
 <body>
+  <div class="wrapper">
+    <h1>Smart Contracts - Basic Example</h1>
+
+    <section class="goals">
+      <h2>Goals</h2>
+      <ul>
+        <li>Create a contract capable of minting and sending ERC-20 tokens</li>
+        <li>Deploy a Smart Contract on the Ropsten test network in Remix</li>
+        <li>Interact with the contract from this web page 
+          <ul>
+            <li>Set up web3.js</li>
+            <li>Read from the Contract (infura?)</li>
+            <li>Write to the contract</li>
+          </ul>
+        </li>
+        <li>Create some sort of conditional statement that results in the minting of tokens to the wallet holder.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Testing</h2>
+      <form id="test-form" action="">
+        <label for="fname">Enter the magic number to earn tokens</label><br>
+        <input type="text" id="fname" name="fname" value=""><br>
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+
+    <section>
+      <h2>Info</h2>
+      <h4>wallet address (main):</h4>
+      <p>0x6935874D51CD8160791566C7741ac8305255d263</p>
+
+      <h4>wallet addres (seconday):</h4>
+      <p>0xFd892bB9b092294ec828B4cC4Ad8c621030c92B2</p>
+
+      <h4>Infura Project ID:</h4>
+      <p>869f6df08e2a4351a92b4980853fb617</p>
+      <p>Hidden Key:</p>
+      <p class="hidden">986f1dcf922e4e8cabb75a3db8811884</p>
+    </section>
+  </div>
   
+  <script src="main.js"></script>
 </body>
 </html>
