@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+
+    font-family: 'Dosis', sans-serif;
+
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 300;
+}
+
+h2 {
+    font-weight: 300;
+    margin-bottom: -40px;
+}
+
+h3 {
+    font-weight: 300;
+    font-size: 2em;
+}
+
+
+
+#sketch-wrapper {
+    /* position: absolute; */
+    margin-top: 100px;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+}
+
+
+#mc_embed_signup_scroll {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+#mce-EMAIL {
+    width: 92%;
+    height: 1.5em;
+}
+
+#info {
+    position: absolute;
+    word-wrap: normal;
+    width: 232px;
+    left: 2.4%;
+    font-size: 18px;
+    background-color: white;
+    padding: 3px;
+}
+
+#info > p {
+    padding-bottom: 20px;
+}
+
+#instructions {
+    position: absolute;
+    word-wrap: normal;
+    width: 232px;
+    right: 2.4%;
+    font-size: 18px;
+    background-color: white;
+    padding: 3px;
+}
+
+#instructions > p {
+    padding-bottom: 20px;
+}
+
+.center {
+    top: 50%;
+    transform: translate(0, -50%)
+}
+/* 
+#coming-soon {
+    margin: 30px;
+} */
+
+.temp {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    font-size: 30px;
+
+}
+
+.temp2 {
+    background: white;
+    padding: 40px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    font-size: 20px;
+
+}
