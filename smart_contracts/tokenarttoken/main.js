@@ -24,7 +24,7 @@ button.addEventListener("click", function(){
 
 // mints a new pattern string to the contract
 button2.addEventListener("click", function() {
-  eth.createPattern("3031");
+  eth.createPattern("12345");
 })
 
 
