@@ -62,10 +62,15 @@ ul {
   width: max-content;
 }
 
-.redacted:hover {
+.r:hover {
   cursor: none;
   background: white;
 }
+
+.copy {
+  font-size: .9em;
+}
+
 
 .copy::after {
   content: "[copy]";
