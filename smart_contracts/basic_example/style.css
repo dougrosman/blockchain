@@ -47,17 +47,36 @@ ul {
 }
 
 #test-form input[type="text"] {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: 'Work Sans', sans-serif;
+  width: 100%;
   max-width: 80vw;
 }
 
 #test-form input[type="submit"] {
-  padding: 1em;
+  padding: .5em 1em;
 }
 
 .hidden {
-  position: absolute;
-  z-index: -1;
+  display: none;
+}
+
+.redacted {
   background: black;
+  width: max-content;
+}
+
+.redacted:hover {
+  cursor: none;
+  background: white;
+}
+
+.copy::after {
+  content: "[copy]";
+  font-size: .75em;
+  margin-left: 1em;
+  background: black;
+  color: white;
+  padding: .3em;
+  cursor: pointer;
 }
