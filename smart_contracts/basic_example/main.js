@@ -21,9 +21,5 @@ $('.copy').on('click', copyToClipboard);
     temp.val($(this).text()).select();
     document.execCommand("copy");
     temp.remove();
-}
-
-
-
-
+  }
 })
