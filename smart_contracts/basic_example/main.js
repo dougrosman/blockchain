@@ -11,7 +11,9 @@ $('.copy').on('click', copyToClipboard);
     let firstPart = location.substring(0, 21);
   
     if(firstPart === required) {
-      $('.hidden').css('display', 'block');
+      const content = `<h4>Hidden Key:</h4>
+      <p class="redacted">986f1dcf922e4e8cabb75a3db8811884</p>`
+      $('.h').append(content);
     }
   }
 

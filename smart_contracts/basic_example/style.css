@@ -57,10 +57,6 @@ ul {
   padding: .5em 1em;
 }
 
-.hidden {
-  display: none;
-}
-
 .redacted {
   background: black;
   width: max-content;
