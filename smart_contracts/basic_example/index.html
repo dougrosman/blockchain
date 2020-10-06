@@ -6,6 +6,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="style.css">
   <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="libs/web3.min.js"></script>
+  <script src="eth_stuff/contractABI.js"></script>
 
   <title>Basic Example</title>
 </head>
@@ -41,25 +43,28 @@
 
     <section>
       <h2>Info</h2>
-      <h4>wallet address (main):</h4>
+      <h4>Doug's wallet address (main):</h4>
       <p class="copy">0x6935874D51CD8160791566C7741ac8305255d263</p>
 
-      <h4>wallet address (secondary):</h4>
+      <h4>Doug's wallet address (secondary):</h4>
       <p class="copy">0xFd892bB9b092294ec828B4cC4Ad8c621030c92B2</p>
 
-      <h4>Infura Project Name:</h4>
+      <h4>Contract Address (Rinkeby):</h4>
+      <p class="copy">0x062908cA7AB6478FC1267b97351d1e372090F18c</p>
+
+      <!-- <h4>Infura Project Name:</h4>
       <p>Basic Contract Example</p>
       <h4>Infura Project ID:</h4>
       <p class="copy">869f6df08e2a4351a92b4980853fb617</p>
       <div class="h"></div>
 
-      <h4>Infura Project Endpoints (Ropsten)</h4>
-      <p class="copy">https://ropsten.infura.io/v3/869f6df08e2a4351a92b4980853fb617</p>
-      <p class="copy">wss://ropsten.infura.io/ws/v3/869f6df08e2a4351a92b4980853fb617</p>
+      <h4>Infura Project Endpoints (Rinkeby)</h4>
+      <p class="copy">https://rinkeby.infura.io/v3/869f6df08e2a4351a92b4980853fb617</p>
+      <p class="copy">wss://rinkeby.infura.io/ws/v3/869f6df08e2a4351a92b4980853fb617</p> -->
       
     </section>
   </div>
-  
-  <script src="main.js"></script>
+  <script src="utils.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

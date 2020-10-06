@@ -1,7 +1,13 @@
 $(document).ready(function(){
 
 
+
+
+
+
 show();
+
+//
 
 $('.copy').on('click', copyToClipboard);
 

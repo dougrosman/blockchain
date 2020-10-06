@@ -42,7 +42,7 @@ class Blockchain {
 
         // implement after creating createGenesisBlock
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 5;
+        this.difficulty = 4;
         
     }
 
