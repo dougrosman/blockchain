@@ -227,7 +227,7 @@ async function handleOnLoad() {
     try {
         await ethereum.enable();
 
-        // Once MetaMask is enable, set the contract
+        // Once MetaMask is enabled, set the contract
         eth.setContract();
     } catch(error) {
         console.error('error');
