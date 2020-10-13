@@ -14,4 +14,4 @@ console.log(rawHash);
 // we convert the hash to a string to get a hexadecimal hash string (the kind we've seen before).
 let hash = rawHash.toString();
 
-console.log(`\nThe regular hash: ${hash}\n`);
+console.log(`\nThe regular hash: ${"a"}\n`);

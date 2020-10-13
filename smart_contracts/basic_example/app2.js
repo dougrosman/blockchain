@@ -16,14 +16,14 @@
 
 // Normally, we would recommend the 'eth_chainId' RPC method, but it currently
 // returns incorrectly formatted chain ID values.
-let currentChainId = ethereum.chainId;
+// let currentChainId = ethereum.chainId;
 
-ethereum.on('chainChanged', handleChainChanged);
+// ethereum.on('chainChanged', handleChainChanged);
 
-function handleChainChanged(_chainId) {
-  // We recommend reloading the page, unless you must do otherwise
-  window.location.reload();
-}
+// function handleChainChanged(_chainId) {
+//   // We recommend reloading the page, unless you must do otherwise
+//   window.location.reload();
+// }
 
 /***********************************************************/
 /* Handle user accounts and accountsChanged (per EIP-1193) */
@@ -66,19 +66,19 @@ function handleAccountsChanged(accounts) {
 // Otherwise, you popup-spam the user like it's 1999.
 // If you fail to retrieve the user's account(s), you should encourage the user
 // to initiate the attempt.
-document.getElementById('connectButton', connect);
+// document.getElementById('connectButton', connect);
 
-function connect() {
-  ethereum
-    .request({ method: 'eth_requestAccounts' })
-    .then(handleAccountsChanged)
-    .catch((err) => {
-      if (err.code === 4001) {
-        // EIP-1193 userRejectedRequest error
-        // If this happens, the user rejected the connection request.
-        console.log('Please connect to MetaMask.');
-      } else {
-        console.error(err);
-      }
-    });
-}
+// function connect() {
+//   ethereum
+//     .request({ method: 'eth_requestAccounts' })
+//     .then(handleAccountsChanged)
+//     .catch((err) => {
+//       if (err.code === 4001) {
+//         // EIP-1193 userRejectedRequest error
+//         // If this happens, the user rejected the connection request.
+//         console.log('Please connect to MetaMask.');
+//       } else {
+//         console.error(err);
+//       }
+//     });
+// }

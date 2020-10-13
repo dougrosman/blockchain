@@ -6,7 +6,7 @@ class Block {
         this.timestamp = timestamp;
         this.data = data;
         this.previousHash = previousHash;
-        this.nonce = 0;
+        this.nonce = 0; // nonce = number only used once
         this.hash = this.calculateHash();
     }
 
@@ -27,7 +27,7 @@ class Block {
 
         while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
             this.nonce++;
-            //console.log(this.hash);
+            // console.log(this.nonce);
             this.hash = this.calculateHash();
         }
 
@@ -42,8 +42,7 @@ class Blockchain {
 
         // implement after creating createGenesisBlock
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 4;
-        
+        this.difficulty = 6;
     }
 
     createGenesisBlock() {
@@ -89,13 +88,13 @@ let demoCoin = new Blockchain();
 console.log("\n$$$$$$$$$$$$$$$$$$$$$ MINING TIME $$$$$$$$$$$$$$$$$$$$$\n")
 
 console.log("Mining block 1...");
-demoCoin.addBlock(new Block(1, "09/22/2020", {amount: 4}));
+demoCoin.addBlock(new Block(1, "09/2f2/2020", {amount: 4}));
 
 console.log("Mining block 2...");
-demoCoin.addBlock(new Block(2, "09/22/2020", {amount: 494}));
+demoCoin.addBlock(new Block(2, "09/22s/2020", {amount: 494}));
 
 console.log("Mining block 3...");
-demoCoin.addBlock(new Block(3, "09/22/2020", {amount: 800}));
+demoCoin.addBlock(new Block(3, "09/2a2/2020", {amount: 800}));
 
 console.log("is blockchain valid? " + demoCoin.isChainValid());
 
