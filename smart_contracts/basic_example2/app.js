@@ -2,19 +2,25 @@ import { ethers } from "./libs/ethers-5.0.esm.min.js";
 
 // A Web3Provider wraps a standard Web3 provider, which is
 // what Metamask injects as window.ethereum into each page
+
+window.ethereum.enable();
+
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 let i = 0;
-
 
 // The Metamask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 const signer = provider.getSigner();
+console.log(signer);
+
+
 const doug1 = "0x6935874D51CD8160791566C7741ac8305255d263";
 const doug2 = "0xFd892bB9b092294ec828B4cC4Ad8c621030c92B2";
+const otherEnt = "0x6935874D51CD8160791566C7741ac8305255d263";
 
-const contractAddress = "0xB583DDA779b86D598Dbf597A6b540972f5AFdEB1";
+const contractAddress = "0x1F4F8C7f4F1b9c6B088797F792192E51AACB7D1A";
 const contractABI = [
   "function name() public view returns (string memory)",
   "function symbol() public view returns (string memory)",
@@ -64,7 +70,7 @@ async function main() {
   console.log("amount to send: " + amount);
 
   
-  //let tx = tokenWithSigner.transfer(doug2, amount);
+  let tx = tokenWithSigner.transfer(doug2, amount);
 }
           
 
