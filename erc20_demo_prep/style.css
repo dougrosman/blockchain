@@ -11,6 +11,10 @@ body {
   overflow-x: hidden;
 }
 
+canvas {
+  display: block;
+}
+
 body:hover {
   cursor: url("cursors/flag-cursor64.png"), pointer;
 }
@@ -18,13 +22,13 @@ body:hover {
 #sketch {
   width: clamp(320px, 90vw, 640px);
   height: clamp(240px, 90vw, 480px);
-  background: black;
+  /* background: black; */
   margin: 0 auto;
 }
 
 .patriotic-text {
   text-align: center;
-  margin: 4vmin;
+  margin: 5vmin;
   font-size: 28px;
   position: relative;
 }
@@ -49,7 +53,7 @@ body:hover {
 }
 
 .twirl {
-  animation: twirl 5s infinite alternate linear;
+  animation: twirl 7s infinite alternate linear;
 }
 
 #myVideo {
@@ -73,6 +77,6 @@ body:hover {
   20% {transform: rotateY(0deg) scale(1);}
   50% {transform: rotateY(360deg) scale(1);}
   80% {transform: rotateY(360deg) scale(1);}
-  90% {transform: rotateY(360deg) scale(2);}
+  90% {transform: rotateY(360deg) scale(1.25);}
   100% {transform: rotateY(360deg) scale(1);}
 }
