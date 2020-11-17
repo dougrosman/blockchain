@@ -1,11 +1,7 @@
-
-
-
 ethereum.autoRefreshOnNetworkChange = false;
 ethereum.enable();
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-// const contractAddress = "0x0f714e3Ab3bcdb6E00f192cce1f176Ac75dB1fe0"; // old
 const contractAddress = "0x8F2580E00De52Dc409651B14268FAf3ca917D1a5";
 const contractABI = [
   "function awardItem(address player, uint256 tokenId) public",
@@ -14,9 +10,6 @@ const contractABI = [
   "function totalSupply() public view returns (uint256)",
   "function tokenByIndex(uint256 index) public view returns (uint256)"
 ];
-
-let tokenId;
-let address;
 
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 const tokenWithSigner = contract.connect(signer);
@@ -27,7 +20,7 @@ let colorTokens = [];
 
 async function main() {
 
-  address = await signer.getAddress();
+  let address = await signer.getAddress();
   console.log(address);
 
   let balance = await contract.balanceOf(address);
