@@ -70,7 +70,6 @@ body {
 .color-token {
   margin: 2vmin;
   box-shadow: 1px 1px 3px darkgray;
-
 }
 
 .color-token__tile {
@@ -84,3 +83,17 @@ body {
   margin: 1.25vmin;
 }
 
+#minted-color {
+  margin: 2vmin auto;
+}
+
+.minted-color__tile {
+  width: 50vmin;
+  height: 50vmin;
+  background: rgb(155,6,255);
+  background: linear-gradient(90deg, rgba(155,6,255,1) 0%, rgba(255,250,0,1) 25%, rgba(29,242,253,1) 50%, rgba(239,30,255,1) 75%, rgba(253,91,46,1) 100%); 
+}
+.minted-color__hex {
+  font-size: 4vmin;
+  margin: 2.5vmin auto;
+}

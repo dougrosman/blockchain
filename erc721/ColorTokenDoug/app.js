@@ -155,6 +155,15 @@ async function checkExisting() {
 async function mintColor() {
 
   shouldReward = await checkExisting();
+  let id = "" + shouldReward;
+
+  let r = parseInt(id.substr(1, 3));
+  let g = parseInt(id.substr(4, 3));
+  let b = parseInt(id.substr(7, 3));
+
+  $('.minted-color__tile').css("background", `rgb(${r}, ${g}, ${b})`)
+  $('.minted-color__hex').text(`${rgbToHex(r, g, b)}`);
+  
 
   if(shouldReward) {
     tokenWithSigner.awardItem(address, shouldReward);
