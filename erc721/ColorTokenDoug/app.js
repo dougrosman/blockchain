@@ -11,6 +11,8 @@ const contractABI = [
   "function tokenByIndex(uint256 index) public view returns (uint256)"
 ];
 
+let address;
+
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 const tokenWithSigner = contract.connect(signer);
 
@@ -20,7 +22,7 @@ let colorTokens = [];
 
 async function main() {
 
-  let address = await signer.getAddress();
+  address = await signer.getAddress();
   console.log(address);
 
   let balance = await contract.balanceOf(address);
