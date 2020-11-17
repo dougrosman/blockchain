@@ -23,33 +23,6 @@ const tokenWithSigner = contract.connect(signer);
 
 main();
 
-///////////// P5 Code ///////////////
-
-function setup() {
-
-  let cnv;
-  if(innerWidth > innerHeight){
-    cnv = createCanvas(innerHeight/2, innerHeight/2);
-  } else {
-    cnv = createCanvas(innerWidth/2, innerWidth/2);
-  }
-
-  cnv.parent("#sketch");
-  
-}
-
-function draw() {
-  background(0);
-}
-
-function windowResized() {
-  if(innerWidth > innerHeight){
-    resizeCanvas(innerHeight/2, innerHeight/2);
-  } else {
-    resizeCanvas(innerWidth/2, innerWidth/2);
-  }
-}
-
 let colorTokens = [];
 
 async function main() {
