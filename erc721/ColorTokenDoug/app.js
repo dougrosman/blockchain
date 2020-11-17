@@ -25,20 +25,7 @@ async function main() {
   address = await signer.getAddress();
   console.log(address);
 
-  let balance = await contract.balanceOf(address);
-  balance = parseInt(balance);
-  console.log(balance);
-
-  
-
-  //colorTokens = await getColorsByOwner(address, balance);
-  //console.log(colorTokens);
-
   await displayOwnedColors(address);
-  //await checkExisting();
-
-  // store the HTML button in a variable
-
 }
 
 // take in an address, display the owned colors
