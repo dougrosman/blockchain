@@ -1,0 +1,2 @@
+# USACoin
+This is USACoin

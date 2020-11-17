@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ERC 721</title>
+    <style>
+        body { font-family: Arial; }
+        nav > * {display: block; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="ColorToken">ColorToken</a>
+    </nav>
+    
+
+    <h2>Notes</h2>
+    <ul>
+        <li><strong>Dealing with time + Eth. How to trigger events?</strong> Chronologic? Ethereum Alarm Clock? On-chain solutions seem tricky at the moment. Offchain, while also complex, seems like a known quantity. IE, host a dapp somewhere (glitch) with a simple javascript function that calls a read-only function from the smart contract once per day. If certain conditions are met, initiate a transaction.</li>
+        <li><strong>(ERC-20) How to automate transactions without needing Metamask approval?</strong> Use the transferFrom function, which requires pre-approval of funds. This could get around that. How to streamline approval in the mint process...</li>
+        <li><strong>How to use the posession of an ERC721 to grant permission to users.</strong> Check that a user owns a specific ERC-721 (also check if they have a certain balance of them). If they satisfy those conditions, then there are extra things they can do (like approve people for transactions)</li>
+
+    </ul>
+    
+</body>
+</html>
