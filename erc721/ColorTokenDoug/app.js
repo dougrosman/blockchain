@@ -17,7 +17,6 @@ const contractABI = [
 
 let tokenId;
 let address;
-let totalSupply
 
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 const tokenWithSigner = contract.connect(signer);
@@ -68,6 +67,9 @@ async function main() {
   //console.log(colorTokens);
 
   await displayOwnedColors(address);
+  //await checkExisting();
+
+  // store the HTML button in a variable
 
 }
 
@@ -144,17 +146,16 @@ function rgbToHex(r, g, b) {
 }
 
 
+async function checkExisting() {
+  let preownedTokens = [];
+  let totalSupply = await contract.totalSupply();
+  totalSupply = parseInt(totalSupply);
 
-// store the HTML button in a variable
-let button = document.getElementById("generate-color")
-
-let shouldReward = true;
-button.addEventListener("click", function(){
-  // generate color, initiate transaction to mint ownership of color
-  mintColor()
-})
-
-function mintColor() {
+  for(let i = 0; i < totalSupply; i++) {
+    let currToken = await contract.tokenByIndex(i);
+    preownedTokens.push(parseInt(currToken));
+  }
+  console.log("preowned tokens: " + preownedTokens);
 
   // generate a random color
   let randomR = Math.floor(Math.random()*256)
@@ -163,10 +164,34 @@ function mintColor() {
 
   let myColor = 1000000000 + randomR*1000000 + randomG*1000 + randomB;
 
-  console.log(myColor);
+  while(preownedTokens.indexOf(myColor) > 0)
+  {
+    randomR = Math.floor(Math.random()*256)
+    randomG = Math.floor(Math.random()*256)
+    randomB = Math.floor(Math.random()*256)
+
+    myColor = 1000000000 + randomR*1000000 + randomG*1000 + randomB;
+  }
+  
+  console.log("unique color: " + myColor);
+
+  return myColor;
+}
+
+
+async function mintColor() {
+
+  shouldReward = await checkExisting();
 
   if(shouldReward) {
-    tokenWithSigner.awardItem(address, myColor);
+    tokenWithSigner.awardItem(address, shouldReward);
     shouldReward = false;
   }
 }
+
+let button = document.getElementById("generate-color")
+let shouldReward = 0;
+button.addEventListener("click", async function(){
+  // generate color, initiate transaction to mint ownership of color
+  await mintColor();
+})
