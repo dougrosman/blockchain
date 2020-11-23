@@ -101,8 +101,6 @@ $('.send-modal__bg').click(function(){
 })
 
 $('.send-modal__btn').click(function(){
-  // verifyAddress();
-  // verifyTokenId();
   sendToken();
 })
 
@@ -112,7 +110,6 @@ function sendToken() {
 
   if(verifyTokenId(token) && verifyAddress(recipAddress)){
     tokenWithSigner.safeTransferFrom(address, recipAddress, token);
-
   }
 }
 
@@ -135,6 +132,11 @@ function verifyAddress(addr) {
   
   let addressRegex = /^0x([A-Fa-f0-9]{40})$/
   if(addressRegex.test(addr)) {
+    if(addr == address) {
+      $('#recipient-address').css("border", "1px solid #f99");
+      $('#invalid-address').text("Can't send to yourself").show();
+      return false;
+    }
     console.log("valid address")
     $('#recipient-address').css("border", "1px solid #9f9");
     $('#invalid-address').hide();
@@ -142,7 +144,7 @@ function verifyAddress(addr) {
   } else {
     console.log("invalid address");
     $('#recipient-address').css("border", "1px solid #f99");
-    $('#invalid-address').show();
+    $('#invalid-address').text("Invalid address").show();
     return false;
   }
 }
@@ -157,7 +159,7 @@ async function getColorsByOwner(_address, _balance) {
     currToken = parseInt(currToken);
     ids.push(currToken);
   }
-  return ids.sort();
+  return ids;
 }
 
 // convert IDs to RGB Colors, return an array of array[r,g,b]
