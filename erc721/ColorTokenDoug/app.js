@@ -83,9 +83,21 @@ async function displayOwnedColors(_address) {
 
 $('.send-modal__close').click(function(){
   $('.send-modal').hide();
+  $('#token-id').css("border", "none");
+  $('#token-id').css("border-bottom", "1px solid darkgray");
+  $('#recipient-address').css("border", "none");
+  $('#recipient-address').css("border-bottom", "1px solid darkgray");
+  $('#invalid-address').hide();
+  $('#invalid-token').hide();
 })
 $('.send-modal__bg').click(function(){
   $('.send-modal').hide();
+  $('#token-id').css("border", "none");
+  $('#token-id').css("border-bottom", "1px solid darkgray");
+  $('#recipient-address').css("border", "none");
+  $('#recipient-address').css("border-bottom", "1px solid darkgray");
+  $('#invalid-address').hide();
+  $('#invalid-token').hide();
 })
 
 $('.send-modal__btn').click(function(){
