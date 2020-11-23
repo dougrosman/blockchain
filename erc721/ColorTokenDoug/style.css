@@ -28,38 +28,6 @@ body {
   margin: 2vmin auto;
 }
 
-#loading {
-  
-  padding: 1em;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 3vmin;
-  width: 2vmin;
-  height: 2vmin;
-  font-weight: 500;
-  margin: 2vmin auto;
-  display: none;
-  animation: loading 10s infinite ease;
-  color: hsl(0,100%,50%);
-  border: 3.9vmin solid rgba(0, 0, 0, 0);
-  border-left-color: rgba(255, 0, 255, 1);
-  border-right-color: rgba(255, 0, 255, 1);
-  border-top-color: rgba(255, 0, 255, 1);
-  border-bottom-color: rgba(0, 255, 255, 1);
-  border-radius: 50%;
-}
-
-@keyframes loading {
-  0% {
-    transform: rotateZ(0deg);
-    filter: hue-rotate(0deg);
-  }
-
-  100% {
-    transform: rotateZ(4320deg);
-    filter: hue-rotate(360deg);
-  }
-}
-
 #generate-color {
   padding: 1em;
   font-family: 'Quicksand', sans-serif;
@@ -73,6 +41,7 @@ body {
   border-top: 2vmin solid rgb(180, 255, 255);
   border-right: 2vmin solid rgb(120, 195, 205);
   border-bottom: 2vmin solid rgb(120, 195, 205);
+  mix-blend-mode: difference;
 }
 
 #generate-color:active {
@@ -88,54 +57,30 @@ body {
   justify-content: flex-start;
 }
 
-#owned__top-bar {
-  padding: 1vmin clamp(.75em, 2vmin, 3em);;
-  position: sticky;
-  top: 0;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-}
-
 #owned__title {
   font-weight: 400;
-  
-  font-size: clamp(16px, 3vmin, 24px);
-}
-
-#owned__send {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 2vmin;
-  font-weight: 400;
-  display: block;
-  border: none;
-  background: none;
+  margin: 2vmin;
 }
 
 .color-gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 }
 
 .color-token {
-  margin: clamp(.75em, 2vmin, 3em);
+  margin: 2vmin;
   box-shadow: 1px 1px 3px darkgray;
-  flex: 0.5 1 200px;
 }
 
 .color-token__tile {
-  /* width: 15vmin; */
-  /* height: 200px; */
-  padding-top: 90%;
-  margin: clamp(.75em, 1.25vmin, 3em);
+  width: 20vmin;
+  height: 20vmin;
+  margin: 1.25vmin;
 }
 
-.color-token__text {
-  margin: clamp(.75em, 1.25vmin, 3em);
-  display: flex;
-  justify-content: space-between;
-  font-size: clamp(12px, 2vmin, 20px);
+.color-token__hex {
+  font-size: 2vmin;
+  margin: 1.25vmin;
 }
 
 #minted-color {
@@ -151,8 +96,4 @@ body {
 .minted-color__hex {
   font-size: 4vmin;
   margin: 2.5vmin auto;
-}
-
-#address {
-  font-size: .65em;
 }

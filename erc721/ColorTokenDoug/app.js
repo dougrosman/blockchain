@@ -1,6 +1,5 @@
 ethereum.autoRefreshOnNetworkChange = false;
 ethereum.enable();
-
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 const contractAddress = "0x8F2580E00De52Dc409651B14268FAf3ca917D1a5";
@@ -13,8 +12,6 @@ const contractABI = [
 ];
 
 let address;
-let totalSupply;
-let preownedTokens = [];
 
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 const tokenWithSigner = contract.connect(signer);
@@ -29,15 +26,12 @@ async function main() {
   console.log(address);
 
   await displayOwnedColors(address);
-
-  
 }
 
 // take in an address, display the owned colors
 async function displayOwnedColors(_address) {
   let balance = await contract.balanceOf(_address);
   balance = parseInt(balance);
-  $("#address").text(address);
 
   // stores an array of ints
   let ownedTokens = await getColorsByOwner(address, balance);
@@ -56,16 +50,13 @@ async function displayOwnedColors(_address) {
     `
       <div class="color-token" id="${colorId}">
         <div class="color-token__tile"></div>
-        <div class="color-token__text">
-          <div class="color-token__num">${i+1}</div>
-          <div class="color-token__hex">#abcdef</div>
-        </div>
+        <div class="color-token__hex">#abcdef</div>
       </div>`
 
     $('.color-gallery').append(colorDiv);
 
     $(`#${colorId}`).children('.color-token__tile').css("background", `rgb(${t.r}, ${t.g}, ${t.b})`);
-    $(`#${colorId}`).children('.color-token__text').children('.color-token__hex').text(`${rgbToHex(t.r, t.g, t.b)}`);
+    $(`#${colorId}`).children('.color-token__hex').text(`${rgbToHex(t.r, t.g, t.b)}`);
     
     tokenCounter++;
   }
@@ -81,7 +72,7 @@ async function getColorsByOwner(_address, _balance) {
     currToken = parseInt(currToken);
     ids.push(currToken);
   }
-  return ids.sort();
+  return ids;
 }
 
 // convert IDs to RGB Colors, return an array of array[r,g,b]
@@ -109,19 +100,17 @@ function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-async function loadExisting() {
-  totalSupply = await contract.totalSupply();
+
+async function checkExisting() {
+  let preownedTokens = [];
+  let totalSupply = await contract.totalSupply();
   totalSupply = parseInt(totalSupply);
+
   for(let i = 0; i < totalSupply; i++) {
     let currToken = await contract.tokenByIndex(i);
     preownedTokens.push(parseInt(currToken));
   }
-  console.log(preownedTokens);
-  return preownedTokens;
-}
-
-
-function checkExisting(_preownedTokens) {
+  console.log("preowned tokens: " + preownedTokens);
 
   // generate a random color
   let randomR = Math.floor(Math.random()*256)
@@ -130,7 +119,7 @@ function checkExisting(_preownedTokens) {
 
   let myColor = 1000000000 + randomR*1000000 + randomG*1000 + randomB;
 
-  while(_preownedTokens.indexOf(myColor) > 0)
+  while(preownedTokens.indexOf(myColor) > 0)
   {
     randomR = Math.floor(Math.random()*256)
     randomG = Math.floor(Math.random()*256)
@@ -147,53 +136,25 @@ function checkExisting(_preownedTokens) {
 
 async function mintColor() {
 
-  let timeOut;
-  var interval = 250;
-  let cycle = true;
-  $('#loading').show();
-  $('#generate-color').hide();
+  shouldReward = await checkExisting();
+  let id = "" + shouldReward;
 
-  setInterval(function(){
-    if(cycle) {
-      let randR = Math.floor(Math.random()*256);
-      let randG = Math.floor(Math.random()*256);
-      let randB = Math.floor(Math.random()*256);
-      $('.minted-color__tile').css("background", `rgb(${randR}, ${randG}, ${randB})`)
-      $('.minted-color__hex').text(`${rgbToHex(randR, randG, randB)}`);
-    }
-  }, interval);
+  let r = parseInt(id.substr(1, 3));
+  let g = parseInt(id.substr(4, 3));
+  let b = parseInt(id.substr(7, 3));
+
+  $('.minted-color__tile').css("background", `rgb(${r}, ${g}, ${b})`)
+  $('.minted-color__hex').text(`${rgbToHex(r, g, b)}`);
   
 
-  if(preownedTokens.length == 0) {
-    preownedTokens = await loadExisting();
-    timeOut = 0;
-  } else {
-    timeOut = 10000;
+  if(shouldReward) {
+    tokenWithSigner.awardItem(address, shouldReward);
+    shouldReward = false;
   }
-  
-  setTimeout(function(){
-    cycle = false;
-    $('#loading').hide();
-    $('#generate-color').css("display", "block");
-  
-    let rewardId = checkExisting(preownedTokens);
-    let id = "" + rewardId;
-
-    let r = parseInt(id.substr(1, 3));
-    let g = parseInt(id.substr(4, 3));
-    let b = parseInt(id.substr(7, 3));
-
-    $('.minted-color__tile').css("background", `rgb(${r}, ${g}, ${b})`)
-    $('.minted-color__hex').text(`${rgbToHex(r, g, b)}`);
-    
-    tokenWithSigner.awardItem(address, rewardId);
-  
-  }, timeOut);
-  
 }
 
 let button = document.getElementById("generate-color")
-
+let shouldReward = 0;
 button.addEventListener("click", async function(){
   // generate color, initiate transaction to mint ownership of color
   await mintColor();
