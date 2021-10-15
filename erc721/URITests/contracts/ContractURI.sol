@@ -5,6 +5,8 @@
 
 // Goal: Implement a basic NFT that allows ownership of a color
 
+// SPDX-License-Identifier: GPL-3.0
+
 
 pragma solidity ^0.6.0;
 
